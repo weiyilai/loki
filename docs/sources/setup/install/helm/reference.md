@@ -4628,7 +4628,10 @@ null
   "serviceAnnotations": {},
   "serviceLabels": {},
   "terminationGracePeriodSeconds": 300,
-  "tolerations": []
+  "tolerations": [],
+  "updateStrategy": {
+    "type": "RollingUpdate"
+  }
 }
 </pre>
 </td>
@@ -4915,6 +4918,26 @@ null
 </td>
 		</tr>
 		<tr>
+			<td>indexGateway.updateStrategy</td>
+			<td>object</td>
+			<td>UpdateStrategy for the indexGateway StatefulSet.</td>
+			<td><pre lang="json">
+{
+  "type": "RollingUpdate"
+}
+</pre>
+</td>
+		</tr>
+		<tr>
+			<td>indexGateway.updateStrategy.type</td>
+			<td>string</td>
+			<td>One of  'OnDelete' or 'RollingUpdate'</td>
+			<td><pre lang="json">
+"RollingUpdate"
+</pre>
+</td>
+		</tr>
+		<tr>
 			<td>ingester</td>
 			<td>object</td>
 			<td>Configuration for the ingester</td>
@@ -5004,6 +5027,9 @@ null
       "whenUnsatisfiable": "ScheduleAnyway"
     }
   ],
+  "updateStrategy": {
+    "type": "RollingUpdate"
+  },
   "zoneAwareReplication": {
     "enabled": true,
     "maxUnavailablePct": 33,
@@ -5417,6 +5443,26 @@ Defaults to allow skew no more than 1 node
 </td>
 		</tr>
 		<tr>
+			<td>ingester.updateStrategy</td>
+			<td>object</td>
+			<td>UpdateStrategy for the ingester StatefulSets.</td>
+			<td><pre lang="json">
+{
+  "type": "RollingUpdate"
+}
+</pre>
+</td>
+		</tr>
+		<tr>
+			<td>ingester.updateStrategy.type</td>
+			<td>string</td>
+			<td>One of  'OnDelete' or 'RollingUpdate'</td>
+			<td><pre lang="json">
+"RollingUpdate"
+</pre>
+</td>
+		</tr>
+		<tr>
 			<td>ingester.zoneAwareReplication</td>
 			<td>object</td>
 			<td>Enabling zone awareness on ingesters will create 3 statefulests where all writes will send a replica to each zone. This is primarily intended to accelerate rollout operations by allowing for multiple ingesters within a single zone to be shutdown and restart simultaneously (the remaining 2 zones will be guaranteed to have at least one copy of the data). Note: This can be used to run Loki over multiple cloud provider availability zones however this is not currently recommended as Loki is not optimized for this and cross zone network traffic costs can become extremely high extremely quickly. Even with zone awareness enabled, it is recommended to run Loki in a single availability zone.</td>
@@ -5640,6 +5686,7 @@ null
       "/loki/api/v1/index/volume",
       "/loki/api/v1/index/volume_range",
       "/loki/api/v1/format_query",
+      "/loki/api/v1/detected_field",
       "/loki/api/v1/detected_fields",
       "/loki/api/v1/detected_labels",
       "/loki/api/v1/patterns"
@@ -5702,6 +5749,7 @@ null
   "/loki/api/v1/index/volume",
   "/loki/api/v1/index/volume_range",
   "/loki/api/v1/format_query",
+  "/loki/api/v1/detected_field",
   "/loki/api/v1/detected_fields",
   "/loki/api/v1/detected_labels",
   "/loki/api/v1/patterns"
@@ -6184,6 +6232,7 @@ null
   "azure": {
     "accountKey": null,
     "accountName": null,
+    "chunkDelimiter": null,
     "connectionString": null,
     "endpointSuffix": null,
     "requestTimeout": null,
